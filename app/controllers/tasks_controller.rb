@@ -13,11 +13,12 @@ class TasksController < ApplicationController
         @task.project_id = project_id
 
         if @task.valid?
-            puts "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
             @task.save
 
             redirect_to project_task_path(project_id, @task)
         else
+            @project = Project.find(project_id)
+
             render :new
         end
     end

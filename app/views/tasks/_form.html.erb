@@ -16,12 +16,12 @@
 <%= form_for [project, task] do |f| %>
     <div class="field">
     <%= f.label :summary %><br />
-    <%= f.text_field :summary %>
+    <%= f.text_field :summary, size: "100" %>
     </div>
-
+    <br>
     <div class="field">
     <%= f.label :description %><br>
-    <%= f.text_area :description, size: "96x12" %>
+    <%= f.text_area :description, size: "135x20" %>
     </div>
 
     <div class="field">

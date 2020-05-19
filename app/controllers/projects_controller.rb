@@ -10,18 +10,15 @@ class ProjectsController < ApplicationController
         project = Project.new(project_params)
         project.owner_id = current_user.id
 
-        puts project.valid?
-
         if project.valid?
             project.save
-            puts "#####################################"
-            puts project.owner_id
-            puts "#####################################"
+            binding.pry
 
             redirect_to project_path(project)
         else
             @project = project
 
+            flash.now[:alert] = "Creation unsuccessful. Make sure that both fields are filled out and you aren't reusing project names"
             render :new
         end
     end

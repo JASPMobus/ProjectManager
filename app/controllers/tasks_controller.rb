@@ -5,7 +5,6 @@ class TasksController < ApplicationController
 
     def new
         @task = Task.new
-        @project = Project.find(project_id)
     end
 
     def create
@@ -17,15 +16,12 @@ class TasksController < ApplicationController
 
             redirect_to project_task_path(project_id, @task)
         else
-            @project = Project.find(project_id)
-
             render :new
         end
     end
 
     def edit
         @task = Task.find(params[:id])
-        @project = Project.find(project_id)
     end
 
     def update
@@ -37,8 +33,6 @@ class TasksController < ApplicationController
 
             redirect_to project_task_path(project_id, @task)
         else
-            @project = Project.find(project_id)
-
             render :new
         end
     end

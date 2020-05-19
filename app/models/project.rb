@@ -12,4 +12,8 @@ class Project < ApplicationRecord
     def owner
         User.find(self.owner_id)
     end
+
+    def self.exists?(id)
+        !!Project.find_by(id: id)
+    end
 end

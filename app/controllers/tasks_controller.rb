@@ -1,6 +1,10 @@
 class TasksController < ApplicationController
+    include ProjectsHelper
+
+    before_action :check_project_before_action
+
     def index
-        @tasks = Task.all
+        @tasks = Project.find(project_id).tasks
     end
 
     def new
@@ -67,5 +71,10 @@ class TasksController < ApplicationController
           :description,
           :user_id
         )
+    end
+
+    def check_project_before_action
+        check_project(project_id) do
+        end
     end
 end

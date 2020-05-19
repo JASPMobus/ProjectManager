@@ -1,4 +1,6 @@
 class ProjectsController < ApplicationController
+    include ProjectsHelper
+    
     def index
         @projects = Project.all
     end
@@ -8,20 +10,24 @@ class ProjectsController < ApplicationController
     end
 
     def create
-        @project = Project.new(project_params)
-        @project.owner_id = current_user.id
+        check_project(params[:id]) do
+            @project = Project.new(project_params)
+            @project.owner_id = current_user.id
 
-        if @project.valid?
-            @project.save
+            if @project.valid?
+                @project.save
 
-            redirect_to project_path(@project)
-        else
-            render :new
+                redirect_to project_path(@project)
+            else
+                render :new
+            end
         end
     end
 
     def edit
-        @project = Project.find(params[:id])
+        check_project(params[:id]) do
+            @project = Project.find(params[:id])
+        end 
     end
 
     def update
@@ -38,7 +44,9 @@ class ProjectsController < ApplicationController
     end
 
     def show
-        @project = Project.find(params[:id])
+        check_project(params[:id]) do 
+            @project = Project.find(params[:id])
+        end
     end
 
     def destroy

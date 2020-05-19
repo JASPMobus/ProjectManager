@@ -6,10 +6,10 @@ class Project < ApplicationRecord
     #Validations
     #The project must have a name that the user hasn't already used for a different project.
     validates :name, presence: true
-    validates :name, uniqueness: { scope: [:owner] }
+    validates :name, uniqueness: { scope: :owner_id }
 
     #Methods
     def owner
-        User.find(owner_id)
+        User.find(self.owner_id)
     end
 end

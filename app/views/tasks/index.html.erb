@@ -1,0 +1,3 @@
+<% @tasks.each do |task| %>
+    <p><%= link_to "#{task.user.name} is working on #{task.summary}", project_task_path(task.project, task) %></p>
+<% end %>

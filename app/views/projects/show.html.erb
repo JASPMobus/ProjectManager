@@ -4,5 +4,6 @@
 <p><%= @project.description %>
 <hr>
 <p><%= link_to "Edit This Project", edit_project_path(@project) %></p>
+<p><%= link_to "View Current Tasks", project_tasks_path(@project) %></p>
 <p><%= link_to "Add A Task to This Project", new_project_task_path(@project) %></p>
 <p><%= link_to 'Delete This Project', @project, method: :delete, data: { confirm: 'Are you sure?' } %></p>

@@ -24,6 +24,23 @@ class ProjectsController < ApplicationController
         @project = Project.find(params[:id])
     end
 
+    def destroy
+        @project = Project.find(params[:id])
+        
+        #destroy all connected tasks
+        @project.tasks.each do |task|
+            task.destroy
+        end
+        
+        #destroy the project
+        @project.destroy
+
+        #Provide visual confirmation of deletion and redirect to project index page
+        flash[:notice] = "Project deleted."
+
+        redirect_to projects_path
+    end 
+
     private
 
     def project_params

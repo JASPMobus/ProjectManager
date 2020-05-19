@@ -8,17 +8,14 @@ class ProjectsController < ApplicationController
     end
 
     def create
-        project = Project.new(project_params)
-        project.owner_id = current_user.id
+        @project = Project.new(project_params)
+        @project.owner_id = current_user.id
 
-        if project.valid?
-            project.save
-            @project = project
+        if @project.valid?
+            @project.save
 
             redirect_to project_path(project)
         else
-            @project = project
-
             render :new
         end
     end

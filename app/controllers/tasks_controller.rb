@@ -5,16 +5,18 @@ class TasksController < ApplicationController
 
     def new
         @task = Task.new
+        @project = Project.find(project_id)
     end
 
     def create
         @task = Task.new(task_params)
-        @task.project_id = params[:project_id]
+        @task.project_id = project_id
 
         if @task.valid?
+            puts "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
             @task.save
 
-            redirect_to task_path(task)
+            redirect_to project_task_path(project_id, @task)
         else
             render :new
         end
@@ -26,10 +28,15 @@ class TasksController < ApplicationController
 
     private
 
+    def project_id
+        params[:project_id]
+    end
+
     def task_params
         params.require(:task).permit(
-          :name,
-          :description
+          :summary,
+          :description,
+          :user_id
         )
     end
 end

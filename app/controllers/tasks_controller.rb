@@ -23,9 +23,42 @@ class TasksController < ApplicationController
         end
     end
 
+    def edit
+        @task = Task.find(params[:id])
+        @project = Project.find(project_id)
+    end
+
+    def update
+        @task = Task.find(params[:id])
+        @task.update(task_params)
+
+        if @task.valid?
+            @task.save
+
+            redirect_to project_task_path(project_id, @task)
+        else
+            @project = Project.find(project_id)
+
+            render :new
+        end
+    end
+
     def show
         @task = Task.find(params[:id])
     end
+
+    def destroy
+        @task = Task.find(params[:id])
+        @project = @task.project
+        
+        #destroy the task
+        @task.destroy
+
+        #Provide visual confirmation of deletion and redirect to task index page
+        flash[:notice] = "Task deleted."
+
+        redirect_to project_path(@project.id)
+    end 
 
     private
 

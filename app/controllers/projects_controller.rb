@@ -19,7 +19,6 @@ class ProjectsController < ApplicationController
         else
             @project = project
 
-            flash.now[:alert] = "Creation unsuccessful. Make sure that both fields are filled out and you aren't reusing project names"
             render :new
         end
     end

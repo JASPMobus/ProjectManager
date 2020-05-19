@@ -1,11 +1,26 @@
+<% if project.errors.any? %>
+  <div id="error_explanation">
+    <h3>
+      <%= pluralize(project.errors.count, "error") %>
+      prohibited this project from being saved:
+    </h3>
+ 
+    <ul>
+    <% project.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= form_for project do |f| %>
     <div class="field">
-    <%= f.label :name %><br />
+    <%= f.label :name %><br>
     <%= f.text_field :name %>
     </div>
 
     <div class="field">
-    <%= f.label :description %><br />
+    <%= f.label :description %><br>
     <%= f.text_field :description %>
     </div>
 

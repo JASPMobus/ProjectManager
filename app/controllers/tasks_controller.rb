@@ -5,6 +5,7 @@ class TasksController < ApplicationController
 
     def new
         @task = Task.new
+        @task.project_id = project_id
     end
 
     def create

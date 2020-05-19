@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
     def index
+        @projects = Project.all
     end
 
     def new
@@ -12,6 +13,7 @@ class ProjectsController < ApplicationController
 
         if project.valid?
             project.save
+            @project = project
 
             redirect_to project_path(project)
         else
@@ -23,7 +25,7 @@ class ProjectsController < ApplicationController
     end
 
     def show
-        @project = Project.find_by(params["id"])
+        @project = Project.find(params[:id])
     end
 
     private

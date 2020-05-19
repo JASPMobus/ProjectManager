@@ -12,7 +12,6 @@ class ProjectsController < ApplicationController
 
         if project.valid?
             project.save
-            binding.pry
 
             redirect_to project_path(project)
         else

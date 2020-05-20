@@ -16,7 +16,7 @@ class Task < ApplicationRecord
         tasks_by_project = {}
 
         projects.each do |project|
-            project_tasks = tasks.filter { |t| t.project = project }
+            project_tasks = tasks.filter { |t| t.project == project }
 
             tasks_by_project[project] = project_tasks
         end

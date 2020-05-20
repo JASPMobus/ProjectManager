@@ -2,11 +2,19 @@ class TasksController < ApplicationController
     include ProjectsHelper
     include TasksHelper
 
-    before_action :check_project_before_action, except: :destroy
+    before_action :check_project_before_action, except: [:destroy, :mine]
 
     def index
         @project = Project.find(project_id)
         @tasks = @project.tasks
+    end
+
+    def mine
+        @tasks_by_projects = Task.my_tasks_by_project(current_user.id)
+
+        puts @tasks_by_projects
+
+        render :mine
     end
 
     def new

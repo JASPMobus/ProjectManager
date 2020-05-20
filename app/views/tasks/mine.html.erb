@@ -1,0 +1,10 @@
+<% @tasks_by_projects.each do |project, tasks| %>
+    <h3><%= link_to project.name, project_path(project.id) %></h3>
+    <ul>
+    <% tasks.each do |task| %>
+        <li><%= link_to "#{task.summary}", project_task_path(task.project, task) %></li>
+    <% end %>
+    </ul>
+<% end %>
+<hr>
+<p><%= link_to "View All Projects", projects_path %></p>

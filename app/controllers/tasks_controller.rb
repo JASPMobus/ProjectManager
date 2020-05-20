@@ -1,10 +1,11 @@
 class TasksController < ApplicationController
     include ProjectsHelper
 
-    before_action :check_project_before_action
+    before_action :check_project_before_action, except: :destroy
 
     def index
-        @tasks = Project.find(project_id).tasks
+        @project = Project.find(project_id)
+        @tasks = @project.tasks
     end
 
     def new
@@ -48,6 +49,7 @@ class TasksController < ApplicationController
 
     def destroy
         @task = Task.find(params[:id])
+        puts @task
         @project = @task.project
         
         #destroy the task

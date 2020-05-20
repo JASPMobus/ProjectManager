@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
     include ProjectsHelper
+    include TasksHelper
 
     before_action :check_project_before_action, except: :destroy
 
@@ -27,7 +28,9 @@ class TasksController < ApplicationController
     end
 
     def edit
-        @task = Task.find(params[:id])
+        check_task(project_id, params[:id]) do
+            @task = Task.find(params[:id])
+        end
     end
 
     def update
@@ -44,7 +47,9 @@ class TasksController < ApplicationController
     end
 
     def show
-        @task = Task.find(params[:id])
+        check_task(project_id, params[:id]) do
+            @task = Task.find(params[:id])
+        end
     end
 
     def destroy

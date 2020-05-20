@@ -1,7 +1,9 @@
 class TasksController < ApplicationController
+    include ApplicationHelper
     include ProjectsHelper
     include TasksHelper
 
+    before_action :check_login
     before_action :check_project_before_action, except: [:destroy, :mine]
 
     def index

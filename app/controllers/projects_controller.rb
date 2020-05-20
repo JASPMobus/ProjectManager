@@ -1,5 +1,8 @@
 class ProjectsController < ApplicationController
+    include ApplicationHelper
     include ProjectsHelper
+    
+    before_action :check_login
     
     def index
         @projects = Project.all

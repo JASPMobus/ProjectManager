@@ -10,17 +10,21 @@ class ProjectsController < ApplicationController
     end
 
     def create
-        check_project(params[:id]) do
-            @project = Project.new(project_params)
-            @project.owner_id = current_user.id
+        @project = Project.new(project_params)
+        @project.owner_id = current_user.id
 
-            if @project.valid?
-                @project.save
+        if @project.valid?
+            @project.save
 
-                redirect_to project_path(@project)
-            else
-                render :new
-            end
+            redirect_to project_path(@project)
+        else
+            render :new
+        end
+    end
+
+    def show
+        check_project(params[:id]) do 
+            @project = Project.find(params[:id])
         end
     end
 
@@ -40,12 +44,6 @@ class ProjectsController < ApplicationController
             redirect_to project_path(@project)
         else
             render :edit
-        end
-    end
-
-    def show
-        check_project(params[:id]) do 
-            @project = Project.find(params[:id])
         end
     end
 

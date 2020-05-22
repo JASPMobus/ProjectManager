@@ -12,7 +12,7 @@ class TasksController < ApplicationController
     end
 
     def mine
-        @tasks_by_projects = Task.my_tasks_by_project(current_user.id)
+        @tasks_by_projects = Task.my_tasks_by_project(current_user)
 
         puts @tasks_by_projects
 

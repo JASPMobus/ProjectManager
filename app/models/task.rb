@@ -7,11 +7,11 @@ class Task < ApplicationRecord
     validates :summary, presence: true
     validates :summary, length: { maximum: 100 }
 
-    def self.my_tasks_by_project(user_id)
+    def self.my_tasks_by_project(user)
         #collect all tasks assigned to the user
-        tasks = Task.where("user_id = #{user_id}")
+        tasks = user.tasks
 
-        projects = User.find(user_id).projects
+        projects = user.projects
 
         tasks_by_project = {}
 

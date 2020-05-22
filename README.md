@@ -1,24 +1,26 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Project Manager
 
-Things you may want to cover:
+Project Manager is a simple app that can be used to organize a project into tasks and assign tasks to individual users to address.
 
-* Ruby version
+## Install
 
-* System dependencies
+To install this app, clone the repository. Then, navigate to its directory in your command line and run
 
-* Configuration
+```
+$ bundle install
+```
 
-* Database creation
+After that, the app should be useable outside of the ability to connect through Github, which naturally requires a secret.
 
-* Database initialization
+## Contributing
 
-* How to run the test suite
+Bug reports and pull requests are welcome on GitHub at https://github.com/JASPMobus/projectmanager.
 
-* Services (job queues, cache servers, search engines, etc.)
+## License
+[MIT License](https://opensource.org/licenses/MIT).
 
-* Deployment instructions
+## Authors
 
-* ...
+**James Mobus**

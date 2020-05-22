@@ -3,4 +3,5 @@
     <p><%= link_to "#{project.name} by #{project.owner.name}", project_path(project.id) %></p>
 <% end %>
 <hr>
+<p><%= link_to "View All Projects", projects_path %></p>
 <p><%= link_to "Start A New Project", new_project_path %></p>

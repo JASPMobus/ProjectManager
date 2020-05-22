@@ -8,6 +8,12 @@ class ProjectsController < ApplicationController
         @projects = Project.all
     end
 
+    def started_by
+        @projects = Project.owned_by(params[:owner_id])
+
+        render :index
+    end
+
     def new
         @project = Project.new
     end

@@ -7,7 +7,13 @@ class ProjectsController < ApplicationController
     
     #Shows all projects on a single page.
     def index
-        @projects = Project.all
+        search = params[:search] 
+
+        if search
+            @projects = Project.all.filter { |p| p.name.include?(search)}
+        else
+            @project = Project.all
+        end
     end
 
     #Shows all projects created by the user represented by the given owner_id on a single page.
@@ -46,20 +52,20 @@ class ProjectsController < ApplicationController
     #Showing the page that represents a single project.
     def show
         check_project(params[:id]) do 
-            @project = Project.find(params[:id])
+            @project = project
         end
     end
 
     #Editing form for projects.
     def edit
         check_project(params[:id]) do
-            @project = Project.find(params[:id])
+            @project = project
         end 
     end
 
     #Processing a form submission for edited projects.
     def update
-        @project = Project.find(params[:id])
+        @project = project
         @project.update(project_params)
 
         if @project.valid?
@@ -73,7 +79,7 @@ class ProjectsController < ApplicationController
 
     #Destroying the project represented by the given ID.
     def destroy
-        @project = Project.find(params[:id])
+        @project = project
         
         #destroy all connected tasks
         @project.tasks.each do |task|
@@ -97,5 +103,9 @@ class ProjectsController < ApplicationController
           :name,
           :description
         )
+    end
+
+    def project
+        Project.find(params[:id])
     end
 end

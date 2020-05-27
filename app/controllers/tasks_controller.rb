@@ -46,13 +46,13 @@ class TasksController < ApplicationController
     #Editing form for tasks.
     def edit
         check_task(project_id, params[:id]) do
-            @task = Task.find(params[:id])
+            @task = task
         end
     end
 
     #Processing a form submission for edited tasks.
     def update
-        @task = Task.find(params[:id])
+        @task = task
         @task.update(task_params)
 
         if @task.valid?
@@ -67,14 +67,13 @@ class TasksController < ApplicationController
     #Showing the page that represents a single task.
     def show
         check_task(project_id, params[:id]) do
-            @task = Task.find(params[:id])
+            @task = task
         end
     end
 
     #Destroying the task represented by the given ID.
     def destroy
-        @task = Task.find(params[:id])
-        puts @task
+        @task = task
         @project = @task.project
         
         #destroy the task
@@ -107,4 +106,8 @@ class TasksController < ApplicationController
         check_project(project_id) do
         end
     end
+
+    def task
+        Task.find(params[:id])
+    end 
 end

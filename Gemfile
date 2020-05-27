@@ -61,3 +61,4 @@ gem 'omniauth'
 gem 'omniauth-oauth2'
 gem 'omniauth-github'
 gem 'dotenv'
+gem 'dotenv-rails', github: "bkeepers/dotenv"

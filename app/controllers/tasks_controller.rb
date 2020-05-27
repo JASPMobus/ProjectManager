@@ -6,11 +6,13 @@ class TasksController < ApplicationController
     before_action :check_login
     before_action :check_project_before_action, except: [:destroy, :mine]
 
+    #Shows all tasks for the selected project on a single page.
     def index
         @project = Project.find(project_id)
         @tasks = @project.tasks
     end
 
+    #Shows all tasks for the logged in user on a single page, regardless of project.
     def mine
         @tasks_by_projects = Task.my_tasks_by_project(current_user)
 
@@ -19,13 +21,17 @@ class TasksController < ApplicationController
         render :mine
     end
 
+    #Creation form for tasks.
     def new
         @task = Task.new
         @task.project_id = project_id
     end
 
+    #Processing a form submission for new tasks.
     def create
         @task = Task.new(task_params)
+
+        #tasks are nested under projects at creation, so there isn't a field necessary in the form. We manually put in the info.
         @task.project_id = project_id
 
         if @task.valid?
@@ -37,12 +43,14 @@ class TasksController < ApplicationController
         end
     end
 
+    #Editing form for tasks.
     def edit
         check_task(project_id, params[:id]) do
             @task = Task.find(params[:id])
         end
     end
 
+    #Processing a form submission for edited tasks.
     def update
         @task = Task.find(params[:id])
         @task.update(task_params)
@@ -56,12 +64,14 @@ class TasksController < ApplicationController
         end
     end
 
+    #Showing the page that represents a single task.
     def show
         check_task(project_id, params[:id]) do
             @task = Task.find(params[:id])
         end
     end
 
+    #Destroying the task represented by the given ID.
     def destroy
         @task = Task.find(params[:id])
         puts @task
@@ -78,10 +88,12 @@ class TasksController < ApplicationController
 
     private
 
+    #This is used enough that I figured I might as well have it defined here.
     def project_id
         params[:project_id]
     end
 
+    #The params given from the form.
     def task_params
         params.require(:task).permit(
           :summary,
@@ -90,6 +102,7 @@ class TasksController < ApplicationController
         )
     end
 
+    #A yield block can't be in a before_action. This is the workaround that I came up with.
     def check_project_before_action
         check_project(project_id) do
         end

@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
 
     protected
 
+    #Add name to the fields that are taken for users.
     def configure_permitted_parameters
         devise.parameter_sanitizer.permit(:sign_up, keys: [:name])
     end

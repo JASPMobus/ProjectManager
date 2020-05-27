@@ -1,5 +1,5 @@
 <% @tasks.each do |task| %>
-    <p><%= link_to "#{task.user.name} is working on #{task.summary}", project_task_path(task.project, task) %></p>
+    <p><%= link_to "#{task.user.name}", projects_started_by_path(task.user.id) %> is working on <%= link_to "#{task.summary}", project_task_path(task.project, task) %></p>
 <% end %>
 <hr>
 <p><%= link_to "Assign A New Task", new_project_task_path(@project) %></p>

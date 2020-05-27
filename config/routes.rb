@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   resources :tasks, only: [:destroy]
 
   get "tasks/mine", to: "tasks#mine"
-  get "projects/started_by/:owner_id", to: "projects#started_by"
+  get "projects/started_by/:owner_id", to: "projects#started_by", as: "projects_started_by"
 
   root 'projects#index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

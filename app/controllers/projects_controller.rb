@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
     include ApplicationHelper
     include ProjectsHelper
+    include UsersHelper
     
     before_action :check_login
     
@@ -9,9 +10,13 @@ class ProjectsController < ApplicationController
     end
 
     def started_by
-        @projects = Project.owned_by(params[:owner_id])
+        owner_id = params[:owner_id]
+        check_user(owner_id) do
+            @projects = Project.owned_by(owner_id)
+            flash[:alert] = "Projects started by #{User.find(owner_id).name}:"
 
-        render :index
+            render :index
+        end
     end
 
     def new
